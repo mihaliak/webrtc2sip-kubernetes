@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webrtc2sip
+  namespace: webrtc2sip
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: webrtc2sip
+  template:
+    metadata:
+      labels:
+        run: webrtc2sip
+    spec:
+      containers:
+      - image: webrtc2sip:latest
+        imagePullPolicy: Always
+        name: webrtc2sip
+        ports:
+          - containerPort: 10062
+        volumeMounts:
+        - name: webrtc2sip-config
+          mountPath: /etc/webrtc2sip/config.xml
+          subPath: config.xml
+        - name: cert-volume
+          readOnly: true
+          mountPath: "/etc/webrtc2sip/cert"
+      volumes:
+      - name: webrtc2sip-config
+        configMap:
+         name: webrtc2sip-config
+      - name: cert-volume
+        secret:
+          secretName: webrtc2sip-cert
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webrtc2sip-loadbalancer
+  namespace: webrtc2sip
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  selector:
+    run: webrtc2sip
+  ports:
+    - protocol: TCP
+      port: 10062
+      targetPort: 10062
+      name: "wss"

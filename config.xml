@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<config>
+  <debug-level>ERROR</debug-level>
+  <transport>udp;*;10060</transport>
+  <transport>ws;*;10061</transport>
+  <transport>wss;*;10062</transport>
+  <enable-rtp-symetric>yes</enable-rtp-symetric>
+  <enable-100rel>yes</enable-100rel>
+  <enable-media-coder>yes</enable-media-coder>
+  <enable-videojb>yes</enable-videojb>
+  <video-size-pref>vga</video-size-pref>
+  <rtp-buffsize>65535</rtp-buffsize>
+  <avpf-tail-length>100;400</avpf-tail-length>
+  <srtp-mode>optional</srtp-mode>
+  <srtp-type>sdes;dtls</srtp-type>
+  <dtmf-type>rfc2833</dtmf-type>
+  <codecs>opus;pcma;pcmu;gsm;vp8;h264-bp;h264-mp;h263;h263+</codecs>
+  <codec-opus-maxrates>48000;48000</codec-opus-maxrates>
+  <enable-icestun>yes</enable-icestun>
+  <max-fds>-1</max-fds>
+  <ssl-certificates>
+    /etc/webrtc2sip/cert/tls.key;
+    /etc/webrtc2sip/cert/tls.crt;
+    *;
+    no
+  </ssl-certificates>
+  <database>sqlite;*</database>
+</config>
