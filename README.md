@@ -27,12 +27,20 @@ TIP: You should add liveness and readiness probes to port 10062
 You can use services like [sipML5](https://www.doubango.org/sipml5/call.htm?svn=252#) to test this proxy. With configuration in this provider you will need to use Export mode.
 
 Enter all required data:
+
+
 Private Entity: 111111111
+
 Public Identity:  sip:111111111@voice.cloudtalk.sk
+
 Password: XXXXXXX
+
 Realm: voice.cloudtalk.sk
 
 
 Export mode settings:
+
+
 WebSocket Server URL:  wss://YOUR_DNS:10062    (YOUR_DNS is domain name point to kubernetes loadbalancer created by this deployment)
+
 SIP outbound Proxy URL: udp://voice.cloudtalk.sk:5060      (original SIP server from your provider)
